@@ -38,20 +38,22 @@ public class JpaTest {
             Address addr1 = new Address("Address-1", "Budapest", "Hungary", "1082");
             Restaurant rest1 = new Restaurant();
             rest1.setName("REST-1");
-            rest1.setAddress(addr1);
 
             manager.persist(rest1);
             manager.persist(addr1);
 
+            rest1.setAddress(addr1);
 
+            manager.persist(rest1);
+            manager.persist(addr1);
 		    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tx.commit();
-
+	
 		//test.listEmployees();
-		//test.listFoods();
+		//test.listFoods();		
 		test.listRestaurants();
 
 		System.out.println(".. done");

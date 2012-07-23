@@ -3,6 +3,7 @@ package com.acme.lunch.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -26,6 +27,7 @@ public class Address {
     private String country;
     private String zipcode;
     
+    @OneToOne(mappedBy="address")
     private Restaurant restaurant;
     
     public String getStreet() {
@@ -69,6 +71,7 @@ public class Address {
         this.id = id;
     }
 
+    
     public Restaurant getRestaurant() {
         return restaurant;
     }

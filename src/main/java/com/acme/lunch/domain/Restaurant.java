@@ -3,6 +3,7 @@ package com.acme.lunch.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Restaurant {
@@ -23,6 +24,7 @@ public class Restaurant {
         this.address = address;
     }
 
+    @OneToOne
     private Address address;
 
     public Long getId() {
