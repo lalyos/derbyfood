@@ -26,6 +26,7 @@ public class Address {
     private String country;
     private String zipcode;
     
+    private Restaurant restaurant;
     
     public String getStreet() {
         return street;
@@ -53,8 +54,27 @@ public class Address {
     }
     @Override
     public String toString() {
+        String resti = "" +  (restaurant == null ? "NULL" : restaurant.getId());
         return "Address [street=" + street + ", city=" + city + ", country="
-                + country + ", zipcode=" + zipcode + "]";
+                + country + ", zipcode=" + zipcode 
+                + ", REST_ID=" + resti 
+                + "]";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
     
 

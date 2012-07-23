@@ -33,7 +33,18 @@ public class JpaTest {
 		try {
 			//test.createEmployees();
 		    //test.createFoods();
-		    test.createRestaurant();
+		    //test.createRestaurant();
+		    
+            Address addr1 = new Address("Address-1", "Budapest", "Hungary", "1082");
+            Restaurant rest1 = new Restaurant();
+            rest1.setName("REST-1");
+            rest1.setAddress(addr1);
+
+            manager.persist(rest1);
+            manager.persist(addr1);
+
+
+		    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
