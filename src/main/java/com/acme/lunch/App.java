@@ -8,7 +8,11 @@ import javax.persistence.Persistence;
 
 import com.acme.lunch.domain.Address;
 import com.acme.lunch.domain.Food;
+import com.acme.lunch.domain.Order;
+import com.acme.lunch.domain.OrderBuilder;
+import com.acme.lunch.domain.OrderState;
 import com.acme.lunch.domain.Restaurant;
+import com.acme.lunch.service.jpa.JpaBasedOrderService;
 import com.acme.lunch.service.jpa.JpaBasedRestaurantRepository;
 
 
@@ -16,11 +20,13 @@ public class App {
 
     private EntityManager manager;
     JpaBasedRestaurantRepository restaurantRepository;
+    JpaBasedOrderService orderService;
     
     public App() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("persistenceUnit");
         manager = factory.createEntityManager();
         restaurantRepository = new JpaBasedRestaurantRepository(manager);
+        orderService = new JpaBasedOrderService(manager);
         
     }
     /**
@@ -31,6 +37,7 @@ public class App {
         App app = new App();
         app.setUp();
         app.testQueries();
+        app.orderFood();
     }
     
     private void setUp() {
@@ -49,6 +56,21 @@ public class App {
         }
         
     }
+    
+    private void orderFood() {
+        Address deliveryAddress = new Address("Otthonra", "bp", "hun", "1111");
+        Order order = OrderBuilder.create(restaurantRepository).by("lalyos")
+                .to(deliveryAddress)
+                .withId(8L)
+                .withId(9L, 3)
+                .withId(4L, 2)
+                .build();
+        
+        
+        OrderState orderState = orderService.doOrder(order);
+        System.out.println("order state: " + orderState);
+    }
+    
     private void createRest1() {
         manager.getTransaction().begin();
 
