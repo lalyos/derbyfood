@@ -36,17 +36,21 @@ public class JpaTest {
 		    //test.createRestaurant();
 		    
             Address addr1 = new Address("Address-1", "Budapest", "Hungary", "1082");
+            manager.persist(addr1);
+            
             Restaurant rest1 = new Restaurant();
             rest1.setName("REST-1");
-
-            manager.persist(rest1);
-            manager.persist(addr1);
+            Restaurant rest2 = new Restaurant();
+            rest2.setName("REST-2");
 
             rest1.setAddress(addr1);
-
+            addr1.getRestaurants().add(rest1);
             manager.persist(rest1);
-            manager.persist(addr1);
-		    
+            
+            rest2.setAddress(addr1);
+            addr1.getRestaurants().add(rest2);
+            manager.persist(rest2);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,10 +64,11 @@ public class JpaTest {
 	}
 
 
-
-
 	private void listRestaurants() {
-        List<Restaurant> resultList = manager.createQuery("Select a From Restaurant a", Restaurant.class).getResultList();
+	   EntityManagerFactory myFactory = Persistence.createEntityManagerFactory("persistenceUnit");
+	   EntityManager myManager = myFactory.createEntityManager();
+
+        List<Restaurant> resultList = myManager.createQuery("Select a From Restaurant a", Restaurant.class).getResultList();
         System.out.println("num of Restaurant:" + resultList.size());
         for (Restaurant next : resultList) {
             System.out.println("next Restaurant: " + next);

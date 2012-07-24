@@ -1,9 +1,12 @@
 package com.acme.lunch.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -11,6 +14,9 @@ public class Address {
     @Id
     @GeneratedValue
     private Long id;
+
+    @OneToMany(mappedBy="address")
+    private List<Restaurant> restaurants = new ArrayList<Restaurant>();
 
     public Address() {
     }
@@ -27,8 +33,6 @@ public class Address {
     private String country;
     private String zipcode;
     
-    @OneToOne(mappedBy="address")
-    private Restaurant restaurant;
     
     public String getStreet() {
         return street;
@@ -56,10 +60,14 @@ public class Address {
     }
     @Override
     public String toString() {
-        String resti = "" +  (restaurant == null ? "NULL" : restaurant.getId());
+        String restaurantStr = "";
+        for (Restaurant next : getRestaurants()) {
+            restaurantStr += next.getName() + ", " ;
+        }
+        
         return "Address [street=" + street + ", city=" + city + ", country="
                 + country + ", zipcode=" + zipcode 
-                + ", REST_ID=" + resti 
+                + ", RESTS=" + restaurantStr 
                 + "]";
     }
 
@@ -71,14 +79,12 @@ public class Address {
         this.id = id;
     }
 
-    
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
     }
-    
 
 }

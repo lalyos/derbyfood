@@ -3,7 +3,7 @@ package com.acme.lunch.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Restaurant {
@@ -24,7 +24,7 @@ public class Restaurant {
         this.address = address;
     }
 
-    @OneToOne
+    @ManyToOne
     private Address address;
 
     public Long getId() {
