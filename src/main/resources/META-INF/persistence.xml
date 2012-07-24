@@ -15,7 +15,10 @@
 			<!-- EclipseLink should create the database schema automatically -->
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
-			<property name="eclipselink.logging.level" value="SEVERE"/>				
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.logging.parameters" value="true" />
+			<property name="eclipselink.logging.timestamp" value="false" />
+			<property name="eclipselink.logging.logger" value="com.acme.lunch.log.helper.Slf4jSessionLogger" />				
 		</properties>
 
 	</persistence-unit>
