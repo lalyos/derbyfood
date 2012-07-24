@@ -2,8 +2,7 @@ package com.acme.lunch.service;
 
 import java.util.List;
 
-import javax.persistence.criteria.Order;
-
+import com.acme.lunch.domain.Order;
 import com.acme.lunch.domain.OrderState;
 
 public interface OrderService {
