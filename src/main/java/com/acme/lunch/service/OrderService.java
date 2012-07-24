@@ -7,7 +7,7 @@ import com.acme.lunch.domain.OrderState;
 
 public interface OrderService {
 
-    public String doOrder(Order order);
+    public OrderState doOrder(Order order);
 
     public OrderState getState(Long orderId);
 
