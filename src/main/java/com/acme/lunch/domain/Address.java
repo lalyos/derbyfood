@@ -79,6 +79,7 @@ public class Address {
         this.id = id;
     }
 
+    @OneToMany(mappedBy="addess")
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }

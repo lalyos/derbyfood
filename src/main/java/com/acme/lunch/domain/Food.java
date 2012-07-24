@@ -3,6 +3,8 @@ package com.acme.lunch.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Food {
@@ -20,6 +22,9 @@ public class Food {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Restaurant restaurant;
+    
     private String name;
     private Integer price;
     private Integer calories;
@@ -51,6 +56,12 @@ public class Food {
     @Override
     public String toString() {
         return "Food [id=" + id + ", name=" + name + ", price=" + price + ", calories=" + calories + "]";
+    }
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
     
 }

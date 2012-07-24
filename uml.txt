@@ -1,0 +1,5 @@
+http://yuml.me/diagram/class/draw
+
+[Restaurant|String name|List\<Food\>menu; Address address]<N-1>[Address|String street;String city;String country;String zip|List\<Restaurant\> restaurants], [Food|String name; Integer price;Integer calories|Restaurant restaurant]<N-1>[Restaurant], [Order|String customer; OrderState state|List\<OrderItems\> items; Address deliveryAddress]<1-N>[OrderItem|Integer quantity|Food food;Order order ], [OrderItem]N-1>[Food], [Order]N-1>[Address]
+
+http://yuml.me/521d2e62.svg
