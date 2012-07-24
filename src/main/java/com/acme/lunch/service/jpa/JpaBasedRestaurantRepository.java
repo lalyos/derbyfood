@@ -30,7 +30,7 @@ public class JpaBasedRestaurantRepository implements RestaurantRepository {
     public void listAllMenu() {
         List<Restaurant> allRestaurants = getAllRestaurants();
         for (Restaurant restaurant : allRestaurants) {
-            System.out.println(format("== %-20s " , restaurant.getName(), restaurant.getId()));
+            System.out.println(format("== %-20s  --- %3$s" , restaurant.getName(), restaurant.getId(), restaurant.getAddress()));
             for (Food food : restaurant.getMenu()) {
                 System.out.println(format("\t[%3s] %-30s %4d Ft [%4d kCal]", food.getId(), food.getName(), food.getPrice() , food.getCalories()));
                 
@@ -40,18 +40,17 @@ public class JpaBasedRestaurantRepository implements RestaurantRepository {
     }
 
     public void addRestaurant(Restaurant restaurant) {
-        
-        em.persist(restaurant);
-        
+                
         Address address = restaurant.getAddress();
         em.persist(address);
+
+        em.persist(restaurant);
+
         List<Food> menu = restaurant.getMenu();
         for (Food food : menu) {
             //set relation and persist
             food.setRestaurant(restaurant);
             em.persist(food);
         }
-        em.persist(restaurant);
-        
     }
 }
